@@ -75,17 +75,14 @@
                         <div class="card-body">
 
                                 <div style="display:flex; justify-content: space-between; align-items: center; ">
-                                    <div style="border:0px solid lime">
-                                        <h4 id="name_candidate">Kandidaat</h4>
-                                        <div style="display:flex; justify-content: space-between; align-items: center; ">
-                                            <button onclick="nextCand(false)" class="btn btn-danger btn-sm"">
-                                                <img src="vendor/icons-master/icons/chevron-left.svg" fill="/#ffffff" alt="left" />
-                                            </button>
-                                                &nbsp;
-                                            <button onclick="nextCand(true)" class="btn btn-danger btn-sm"">
-                                                <img src="vendor/icons-master/icons/chevron-right.svg" alt="left" />
-                                            </button>
-                                        </div>
+                                    <div style="border:0px solid lime; display: flex;">
+                                        <button onclick="nextCand(false)" class="btn btn-danger btn-sm"">
+                                            <img src="vendor/icons-master/icons/chevron-left.svg" fill="/#ffffff" alt="left" />
+                                        </button>
+                                        <h4 style="margin: 0; padding: 10px;" id="name_candidate">Kandidaat</h4>
+                                        <button onclick="nextCand(true)" class="btn btn-danger btn-sm"">
+                                            <img src="vendor/icons-master/icons/chevron-right.svg" alt="left" />
+                                        </button>
                                     </div>
 
                                     <div class="float-right" style="width:100px; margin-left:10px;">
