@@ -25,9 +25,9 @@
   <body>
 
   <div class="modal <?php 
-    if(!isset($_SESSION["ingelogd"]) || $_SESSION["ingelogd"] != true){
-      echo "is-active";
-    } 
+    // if(!isset($_SESSION["ingelogd"]) || $_SESSION["ingelogd"] != true){
+    //   echo "is-active";
+    // } 
   ?>">
     <div class="modal-background"></div>
       <div class="modal-content">
@@ -81,8 +81,12 @@
               <h1 class="title">
                 Stem voortgang
                   <hr />
+                  <select style="width: 100px; padding: 4px;">
+                    <option value="2019" <?php if(date("Y") === "2019") echo"selected='selected';" ?>> 2019 <?php if(date("Y") === "2019") echo"(Nu)" ?> </option>
+                    <option value="2020" <?php if(date("Y") === "2020") echo"selected='selected';" ?>> 2020 <?php if(date("Y") === "2020") echo"(Nu)" ?> </option>
+                  </select>
                   <br />
-                  <h2 class="subtitle">
+                  <h2 class="subtitle" style="margin-top: -5px;">
                     fotograven: 
                   </h2>
               </h1>  
