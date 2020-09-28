@@ -51,7 +51,7 @@
 </head>
 
 <body style="background-color: #ff0000;">
-<?php if($_GET["overlay"] != 1) {
+<?php if(isset($_GET["overlay"]) && $_GET["overlay"] != 1) {
     echo '<div id="overlay"></div>';
 }
 ?>
@@ -100,7 +100,7 @@
                                         </div>
                                         <div>
                                             <?php
-                                            if($_GET["param"] != ""){
+                                            if(isset($_GET["param"]) && $_GET["param"] != ""){
                                                 echo '<div onclick="fClickInput()"><input type="text" id="inp_qrcode" onclick="fClickInput()" style="width:100%;" disabled  value="'.$_GET["param"].'" ></div>';
                                             } else {
                                                 echo '<input type="text" id="inp_qrcode" style="width:100%;"  placeholder="vul stemcode in">'; /*onchange="changedInput(this)"*/
