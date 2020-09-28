@@ -81,15 +81,13 @@
                                             <option value="2019" <?php if(date("Y") === "2019") echo"selected='selected';" ?>>2019 <?php if(date("Y") === "2019") echo"(Nu)" ?></option>
                                             <option value="2020" <?php if(date("Y") === "2020") echo"selected='selected';" ?>>2020 <?php if(date("Y") === "2020") echo"(Nu)" ?></option> 
                                         </select>
-                                        <div style="display:flex;">
-                                            <button onclick="nextCand(false)" class="btn btn-danger btn-sm"">
-                                                <img src="vendor/icons-master/icons/chevron-left.svg" fill="/#ffffff" alt="left" />
-                                            </button>
-                                            <h4 style="margin: 0; padding: 10px;" id="name_candidate">Kandidaat</h4>
-                                            <button onclick="nextCand(true)" class="btn btn-danger btn-sm"">
-                                                <img src="vendor/icons-master/icons/chevron-right.svg" alt="left" />
-                                            </button>
-                                        </div>
+                                        <button onclick="nextCand(false)" class="btn btn-danger btn-sm" style="padding:.35rem .5rem; margin: 2px 0 5px 0;">
+                                            <img src="vendor/icons-master/icons/chevron-left.svg" fill="/#ffffff" alt="left" />
+                                        </button>
+                                        <button onclick="nextCand(true)" class="btn btn-danger btn-sm" style="padding:.35rem .5rem; margin: 2px 0 5px 0;">
+                                            <img src="vendor/icons-master/icons/chevron-right.svg" alt="left" />
+                                        </button>
+                                        <h4 style="margin: 0; padding-top: 10px;" id="name_candidate">Kandidaat</h4>
                                     </div>
 
                                     <div class="float-right" style="width:100px; margin-left:10px;">
