@@ -15,5 +15,5 @@
     }
   }
 
-  header("Location: https://worldpresswedstrijd.nl/beveilig_admin_geentoegang.php");
+  header("Location: "+REMOTE_URL+"/beveilig_admin_geentoegang.php");
 ?>

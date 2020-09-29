@@ -6,7 +6,7 @@ class Settings
   private static $env = "debug/boyd";
   private static $host = "localhost";
   private static $dbname = "stegion_wpf";
-  private static $voteUrl = "https://worldpresswedstrijd.nl/?action=createVote&param=";
+  private static $voteUrl = REMOTE_URL."/?action=createVote&param=";
 
   public static function getVoteUrl()
   {

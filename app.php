@@ -54,12 +54,13 @@
 <?php if(isset($_GET["overlay"]) && $_GET["overlay"] != 1) {
     echo '<div id="overlay"></div>';
 }
+
 ?>
 
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: black;">
         <div class="container">
-            <div class="navbar-header"><a href="https://worldpresswedstrijd.nl/" class="navbar-brand"><img
+            <div class="navbar-header"><a href="<?php echo REMOTE_URL?>" class="navbar-brand"><img
                         src="img/logo.png" alt="" style="height: 40px;"></a></div>
             <ul style="display: flex; list-style-type: none; margin-top: 15px;">
                 <li><a href="javascript:loadMedia(true)"  style="color: rgb(255, 0, 0);">Foto's</a></li>
@@ -169,21 +170,25 @@
 </div>
 <script type="text/javascript">
 
-    var fotoCand = [];
-    var videoCand = [];
-    var dataCand;
-    var currentIndexCand = 0;
-    var current_bFoto = true;
+    let fotoCand = [];
+    let videoCand = [];
+    let dataCand;
+    let currentIndexCand = 0;
+    let current_bFoto = true;
+    const remote_url = 'http://school.local';
 
-    const $source = document.querySelector('#inp_qrcode');
+    const source = document.querySelector('#inp_qrcode');
 
     const typeHandler = function(e) {
         var value = e.target.value; //$(el).val();
         changeButton (value);
 
     }
-    $source.addEventListener('input', typeHandler) // register for oninput
-    $source.addEventListener('propertychange', typeHandler) // for IE8
+    if(source){
+
+        source.addEventListener('input', typeHandler) // register for oninput
+        source.addEventListener('propertychange', typeHandler) // for IE8
+    }
 
     function changeButton (value) {
         //console.log("value.length=" + value.length);
@@ -204,7 +209,7 @@
         var txt;
         if (confirm("Bestaande code wissen?")) {
             //txt = "You pressed OK!";
-            window.location.href ="https://worldpresswedstrijd.nl";
+            window.location.href = remote_url;
         } else {
             //txt = "You pressed Cancel!";
         }
@@ -216,8 +221,8 @@
         //console.log("dataCand.id = ", dataCand.id );
         //console.log("fStem qrcode = "+qrcode );
 
-        // https://worldpresswedstrijd.nl/?action=setVote&param=123605722539&video=2
-        // https://worldpresswedstrijd.nl/?action=setVote&param=123605722539&foto=4
+        // localhost:80/?action=setVote&param=123605722539&video=2
+        // localhost:80/?action=setVote&param=123605722539&foto=4
         /*{
             sMessage: "stem is succesvol",
             bSuccess: true,
@@ -227,7 +232,7 @@
         if(current_bFoto)
             sActive = "foto";
 
-        $.getJSON( "https://worldpresswedstrijd.nl/?action=setVote&param="+qrcode+"&"+sActive+"="+dataCand.id+"", function( json ) {
+        $.getJSON( remote_url+"/?action=setVote&param="+qrcode+"&"+sActive+"="+dataCand.id+"", function( json ) {
             //console.log("antwoord van vote:", json);
             var sMes = "";
             if(!json.bSuccess) {
@@ -249,7 +254,7 @@
     });
 
     function initData() {
-        $.getJSON( "https://worldpresswedstrijd.nl/?action=getMediaPerUser", function( json ) { //https://wpf.stegion.nl/api/wpf.php?action=getMediaPerUser
+        $.getJSON( remote_url+"/?action=getMediaPerUser", function( json ) { //https://wpf.stegion.nl/api/wpf.php?action=getMediaPerUser
             //console.log( "json:", json );
 
             var bfotoCand;

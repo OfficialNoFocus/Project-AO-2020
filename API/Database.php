@@ -16,7 +16,7 @@ class Database
   {
     $this->dbinstance = new \mysqli(...Settings::getDatabaseCredentials());
     if($this->dbinstance->connect_error){
-      throw new \Exception("error connecting to dabaase: " . $this->dbinstance->connect_error);
+      throw new \Exception("error connecting to database: " . $this->dbinstance->connect_error);
     }
   }
 
