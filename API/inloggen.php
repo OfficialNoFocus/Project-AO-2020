@@ -1,6 +1,6 @@
 <?php
   session_start();
-
+  define('REMOTE_URL','http://school.local');
   
 
   if(!isset($_SESSION["ingelogd"])){
@@ -15,5 +15,5 @@
     }
   }
 
-  header("Location: "+REMOTE_URL+"/beveilig_admin_geentoegang.php");
+  header("Location: ".REMOTE_URL."/beveilig_admin_geentoegang.php");
 ?>
