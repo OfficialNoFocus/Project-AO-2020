@@ -86,7 +86,8 @@
                     <option value="2019" <?php if(date("Y") === "2019") echo"selected='selected';" ?>> 2019 <?php if(date("Y") === "2019") echo"(Nu)" ?> </option>
                     <option value="2020" <?php if(date("Y") === "2020") echo"selected='selected';" ?>> 2020 <?php if(date("Y") === "2020") echo"(Nu)" ?> </option>
                   </select>
-                  <a href="<?php echo REMOTE_URL?>/admin-kanidaten/home.php">kanidaten</a>
+                  <a href="<?php echo REMOTE_URL?>/admin-kanidaten/home.php?role=photographer">Fotografen</a>
+                  <a href="<?php echo REMOTE_URL?>/admin-kanidaten/home.php?role=videographer">Videografen</a>
                   <br />
                   <h2 class="subtitle" style="margin-top: -5px;">
                     fotograven: 

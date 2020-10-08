@@ -60,6 +60,46 @@ class Database
     return $this->users;
   }
 
+  public function getPhotographers()
+  {
+    $this->users = [];
+    $this->runQuery("SELECT id, CONCAT(vnaam,' ',IFNULL(tv,' '),' ',anaam) AS naam, jaar, `titel`, `role` FROM users where `role` = 'fotograaf';");
+    //users:id, vnaam, tv, anaam, email, role
+    if(!$this->result){
+      return [];
+    }
+    while($row = $this->result->fetch_assoc()) {  
+      $this->users[$row["id"]] = [];
+
+      $this->users[$row["id"]]["naam"] = utf8_encode($row["naam"]);
+      $this->users[$row["id"]]["jaar"] = utf8_encode($row["jaar"]);
+      $this->users[$row["id"]]["role"] = utf8_encode($row["role"]);
+      $this->users[$row["id"]]["titel"] = utf8_encode($row["titel"]);
+    }
+
+    return $this->users;
+  }
+  
+  public function getVideographers()
+  {
+    $this->users = [];
+    $this->runQuery("SELECT id, CONCAT(vnaam,' ',IFNULL(tv,' '),' ',anaam) AS naam, jaar, `titel`, `role` FROM users where `role` = 'videograaf';");
+    //users:id, vnaam, tv, anaam, email, role
+    if(!$this->result){
+      return [];
+    }
+    while($row = $this->result->fetch_assoc()) {  
+      $this->users[$row["id"]] = [];
+
+      $this->users[$row["id"]]["naam"] = utf8_encode($row["naam"]);
+      $this->users[$row["id"]]["jaar"] = utf8_encode($row["jaar"]);
+      $this->users[$row["id"]]["role"] = utf8_encode($row["role"]);
+      $this->users[$row["id"]]["titel"] = utf8_encode($row["titel"]);
+    }
+
+    return $this->users;
+  }
+
   public function getUser(int $id)
   {
     $this->users = [];
@@ -71,7 +111,7 @@ class Database
 
     while($row = $this->result->fetch_assoc()) {
       $this->users[$row["id"]] = [];
-      $this->users[$row["id"]]["id"] = utf8_encode($row["id"]);
+      // $this->users[$row["id"]]["id"] = utf8_encode($row["id"]);
       $this->users[$row["id"]]["vnaam"] = utf8_encode($row["vnaam"]);
       if(isset($row["tv"])){
         $this->users[$row["id"]]["tv"] = utf8_encode($row["tv"]);
