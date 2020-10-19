@@ -40,8 +40,8 @@
             }
             echo '
             <td>
-                <a class="btn btn-sm d-inline-block" href="<?php echo REMOTE_URL?>/admin-kanidaten/select.php?id='.$id.'"><i class="fas fa-eye"></i></a>
-                <a class="btn btn-sm d-inline-block" href="<?php echo REMOTE_URL?>/admin-kanidaten/edit.php?id='.$id.'"><i class="fas fa-pencil-alt"></i></a>
+                <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/select.php?id='.$id.'"><i class="fas fa-eye"></i></a>
+                <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/edit.php?id='.$id.'"><i class="fas fa-pencil-alt"></i></a>
                 <button class="btn btn-sm" id="delete-btn"><i class="fas fa-trash"></i></button>
             </td>';
             echo '</tr>';

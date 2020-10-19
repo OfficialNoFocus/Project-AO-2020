@@ -103,7 +103,7 @@ class Database
   public function getUser(int $id)
   {
     $this->users = [];
-    $stmt = $this->dbinstance->prepare("SELECT id, vnaam, tv, anaam, email, 'role', beschrijving, titel, groep_opm FROM users WHERE id = ?");
+    $stmt = $this->dbinstance->prepare("SELECT id, CONCAT(vnaam,' ',IFNULL(tv,' '),' ',anaam) AS naam, jaar, `titel`, `role`, beschrijving, groep_opm FROM users where id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $this->result = $stmt->get_result();
@@ -112,12 +112,8 @@ class Database
     while($row = $this->result->fetch_assoc()) {
       $this->users[$row["id"]] = [];
       // $this->users[$row["id"]]["id"] = utf8_encode($row["id"]);
-      $this->users[$row["id"]]["vnaam"] = utf8_encode($row["vnaam"]);
-      if(isset($row["tv"])){
-        $this->users[$row["id"]]["tv"] = utf8_encode($row["tv"]);
-      }
-      $this->users[$row["id"]]["anaam"] = utf8_encode($row["anaam"]);
-      $this->users[$row["id"]]["email"] = utf8_encode($row["email"]);
+      $this->users[$row["id"]]["naam"] = utf8_encode($row["naam"]);
+      $this->users[$row["id"]]["jaar"] = utf8_encode($row["jaar"]);
       $this->users[$row["id"]]["role"] = utf8_encode($row["role"]);
       $this->users[$row["id"]]["beschrijving"] = utf8_encode($row["beschrijving"]);
       $this->users[$row["id"]]["titel"] = utf8_encode($row["titel"]);
