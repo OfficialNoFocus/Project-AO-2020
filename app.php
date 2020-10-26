@@ -180,7 +180,7 @@
     const source = document.querySelector('#inp_qrcode');
 
     const typeHandler = function(e) {
-        var value = e.target.value; //$(el).val();
+        let value = e.target.value; //$(el).val();
         changeButton (value);
 
     }
@@ -192,7 +192,7 @@
 
     function changeButton (value) {
         //console.log("value.length=" + value.length);
-        var sActive = "video";
+        let sActive = "video";
         if(current_bFoto)
             sActive = "foto";
         if (value.length > 8) {
@@ -206,7 +206,7 @@
 
     function fClickInput() {
         //alert("check");
-        var txt;
+        let txt;
         if (confirm("Bestaande code wissen?")) {
             //txt = "You pressed OK!";
             window.location.href = remote_url;
@@ -217,7 +217,7 @@
     }
 
     function fStem() {
-        var qrcode = $("#inp_qrcode").val();
+        let qrcode = $("#inp_qrcode").val();
         //console.log("dataCand.id = ", dataCand.id );
         //console.log("fStem qrcode = "+qrcode );
 
@@ -228,13 +228,13 @@
             bSuccess: true,
             data: null
         }*/
-        var sActive = "video";
+        let sActive = "video";
         if(current_bFoto)
             sActive = "foto";
 
         $.getJSON( remote_url+"/?action=setVote&param="+qrcode+"&"+sActive+"="+dataCand.id+"", function( json ) {
             //console.log("antwoord van vote:", json);
-            var sMes = "";
+            let sMes = "";
             if(!json.bSuccess) {
                 sMes = "stemmen op de "+sActive+ " van " +  dataCand.vnaam+" "+dataCand.tv+" "+dataCand.anaam+ " niet gelukt. Code is al gebruikt of bestaat niet.";
                 //sMes = "fout bij stemmen: " + json.sMessage;
@@ -257,9 +257,9 @@
         $.getJSON( remote_url+"/?action=getMediaPerUser", function( json ) { //https://wpf.stegion.nl/api/wpf.php?action=getMediaPerUser
             //console.log( "json:", json );
 
-            var bfotoCand;
-            var idCand = 0;
-            var objCand = {};
+            let bfotoCand;
+            let idCand = 0;
+            let objCand = {};
             $.each(json.data, function( key, val ) {
                 if(idCand != val.id_cand) { //nieuwe candidate
                     if(!$.isEmptyObject(objCand))
@@ -270,7 +270,7 @@
                     idCand = val.id_cand;
                     objCand = {};
 
-                    if(val.videos == "")
+                    if(val.video == "")
                         bfotoCand = true
                     else
                         bfotoCand = false;
@@ -286,9 +286,9 @@
                         groep_opm: val.groep_opm,
                         foto:[val.img+'.jpg'],
                         desc:[val.desc],
-                        video:val.videos
+                        video:val.video
                         //u.vnaam, u.tv, u.anaam, u.role, u.beschrijving, u.titel, u.groep_opm,
-                        //m.img, m.id_cand, m.videos, m.desc
+                        //m.img, m.id_cand, m.video, m.desc
                     }
                 } else { // if candidate exist just pus photo
                     if(bfotoCand) {
@@ -328,8 +328,8 @@
 
         if(bFoto) {
             // fill indicators an carousel-items candidate
-            var sLis = "";
-            var sDivs = "";
+            let sLis = "";
+            let sDivs = "";
             $.each(dataCand.foto, function( index, foto ) {
                 //console.log(foto);
                 if(index == 0) sLis += '<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>'

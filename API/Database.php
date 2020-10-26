@@ -123,6 +123,46 @@ class Database
     return $this->users;
   }
 
+  public function getUserPhotos(int $id)
+  {
+    $this->media = [];
+    $stmt = $this->dbinstance->prepare("SELECT * FROM media WHERE id_cand = ? AND img IS NOT NULL");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $this->result = $stmt->get_result();
+    $stmt->close();
+
+    while($row = $this->result->fetch_assoc()) {
+      $this->media[$row["id"]] = [];
+      $this->media[$row["id"]]["id"] = utf8_encode($row["id"]);
+      $this->media[$row["id"]]["id_cand"] = utf8_encode($row["id_cand"]);
+      $this->media[$row["id"]]["img"] = utf8_encode($row["img"]);
+      $this->media[$row["id"]]["desc"] = utf8_encode($row["desc"]);
+    }
+
+    return $this->media;
+  }
+
+  public function getUserVideo(int $id)
+  {
+    $this->media = [];
+    $stmt = $this->dbinstance->prepare("SELECT * FROM media WHERE id_cand = ? AND video IS NOT NULL");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $this->result = $stmt->get_result();
+    $stmt->close();
+    
+    while($row = $this->result->fetch_assoc()) {
+      $this->media[$row["id"]] = [];
+      $this->media[$row["id"]]["id"] = utf8_encode($row["id"]);
+      $this->media[$row["id"]]["id_cand"] = utf8_encode($row["id_cand"]);
+      $this->media[$row["id"]]["video"] = utf8_encode($row["video"]);
+      $this->media[$row["id"]]["desc"] = utf8_encode($row["desc"]);
+    }
+
+    return $this->media;
+  }
+
   public function getUserParam()
   {
     return $this->user;
@@ -133,7 +173,7 @@ class Database
     $this->media = [];
     $this->runQuery("SELECT * FROM media WHERE img IS NOT NULL");
 
-    //media: id, img, id_cand, videos, description
+    //media: id, img, id_cand, video, description
     while($row = $this->result->fetch_assoc()) {
       $this->media[$row["id"]] = [];
       $this->media[$row["id"]]["id"] = utf8_encode($row["id"]);
@@ -168,13 +208,13 @@ class Database
   public function getVideos()
   {
     $this->media = [];
-    $this->runQuery("SELECT * FROM media WHERE videos IS NOT NULL");
+    $this->runQuery("SELECT * FROM media WHERE video IS NOT NULL");
 
     while($row = $this->result->fetch_assoc()) {
       $this->media[$row["id"]] = [];
       $this->media[$row["id"]]["id"] = utf8_encode($row["id"]);
       $this->media[$row["id"]]["id_cand"] = utf8_encode($row["id_cand"]);
-      $this->media[$row["id"]]["videos"] = utf8_encode($row["videos"]);
+      $this->media[$row["id"]]["video"] = utf8_encode($row["video"]);
       $this->media[$row["id"]]["desc"] = utf8_encode($row["desc"]);
     }
 
@@ -184,7 +224,7 @@ class Database
   public function getVideo(int $id)
   {
     $this->media = [];
-    $stmt = $this->dbinstance->prepare("SELECT * FROM media WHERE id = ? AND videos IS NOT NULL");
+    $stmt = $this->dbinstance->prepare("SELECT * FROM media WHERE id = ? AND video IS NOT NULL");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $this->result = $stmt->get_result();
@@ -194,7 +234,7 @@ class Database
       $this->media[$row["id"]] = [];
       $this->media[$row["id"]]["id"] = utf8_encode($row["id"]);
       $this->media[$row["id"]]["id_cand"] = utf8_encode($row["id_cand"]);
-      $this->media[$row["id"]]["videos"] = utf8_encode($row["videos"]);
+      $this->media[$row["id"]]["video"] = utf8_encode($row["video"]);
       $this->media[$row["id"]]["desc"] = utf8_encode($row["desc"]);
     }
 
@@ -206,7 +246,7 @@ class Database
     $this->media = [];
 
     $query = "SELECT u.vnaam, u.tv, u.anaam, u.role, u.beschrijving, u.titel, u.groep_opm, 
-      m.img, m.id_cand, m.videos, m.desc
+      m.img, m.id_cand, m.video, m.desc
       FROM users AS u
       INNER JOIN media AS m ON u.id = m.id_cand
       ORDER BY anaam;";
