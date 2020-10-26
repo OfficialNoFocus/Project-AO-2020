@@ -3,7 +3,7 @@
     define('REMOTE_URL','http://school.local');
     require_once($_SERVER['DOCUMENT_ROOT']."/API/Database.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/API/Settings.php");
-    require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
+    // require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
     if($_GET['role'] == 'photographer') {
         $graphers = (new API\Database(API\Settings::getDatabaseCredentials()))->getPhotographers();
     } 
