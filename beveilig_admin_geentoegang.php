@@ -188,6 +188,7 @@
                     flex-wrap: wrap;
                     margin: 0;
                     overflow: hidden; 
+                    margin-bottom: 0!important;
                   }
                   .tabs [class^="tab"] label,
                   .tabs [class*=" tab"] label {
