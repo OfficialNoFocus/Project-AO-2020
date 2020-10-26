@@ -255,7 +255,7 @@
 
     function initData() {
         $.getJSON( remote_url+"/?action=getMediaPerUser", function( json ) { //https://wpf.stegion.nl/api/wpf.php?action=getMediaPerUser
-            //console.log( "json:", json );
+            // console.log( "json:", json );
 
             var bfotoCand;
             var idCand = 0;
@@ -296,7 +296,6 @@
                         objCand.desc.push(val.desc);
                     }
                 }
-
             });
             if(objCand.bfotoCand)
                 fotoCand.push(objCand);  // push last photo candidate in array
