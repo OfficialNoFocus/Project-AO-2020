@@ -50,4 +50,22 @@
     </tbody>
 </table>
 </body>
+<style>
+    body{
+        background-color: #4a4a4a;
+    }
+    th, th .btn {
+        color: #efedef;
+        border-top: 0!important;
+        border-bottom: 0!important;
+        padding-top: 1.5em!important;
+    }
+    table {
+        max-width: 1344px;
+        margin: 0 auto;
+    }
+    td {
+        background-color: #fff;
+    }
+</style>
 </html>
