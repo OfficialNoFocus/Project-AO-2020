@@ -87,7 +87,7 @@ if(isset($_GET["overlay"]) && $_GET["overlay"] != 1) {
                                             <option value="2019">2019</option>
                                             <option value="2020">2020</option> 
                                         </select>
-                                        <!-- <button type="button" onclick="selectYear()">Try it</button> -->
+                                        <button type="button" onclick="selectYear()">Filter</button>
                                         <button onclick="nextCand(false)" class="btn btn-danger btn-sm" style="padding:.35rem .5rem; margin: 2px 0 5px 0;">
                                             <img src="vendor/icons-master/icons/chevron-left.svg" fill="/#ffffff" alt="left" />
                                         </button>
@@ -258,11 +258,6 @@ if(isset($_GET["overlay"]) && $_GET["overlay"] != 1) {
         $('#div_iframe_video').css('display', 'block');
         //console.log("load");
     });
-
-    function selectYear() {
-        let year = document.getElementById("mySelect").value;
-        console.log(year);
-    }
 
     function initData(year) {
         if (year) {
@@ -453,6 +448,12 @@ if(isset($_GET["overlay"]) && $_GET["overlay"] != 1) {
         changeButton ($("#inp_qrcode").val() );
     }
 
+    function selectYear() {
+        let year = document.getElementById("mySelect").value;
+        initData(year);
+        fotoCand = [];
+        videoCand =[];
+    }
     initData();
 </script>
 
