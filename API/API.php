@@ -3,6 +3,7 @@ namespace API;
 
 require_once("Database.php");
 require_once("Pdf.php");
+require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
 /**
  * deze applicatie vereist composer, als je er aan werkt run dan composer update om alle
@@ -26,8 +27,6 @@ class API
 
   public static function runApi()
   {
-
-
     API::$instance = new API();
     API::$instance->handleRequest();
   }
@@ -36,7 +35,7 @@ class API
   {
     if(isset($_GET["action"])){
       header('Access-Control-Allow-Origin: *');
-      header('Content-Type: application/json');
+      // header('Content-Type: application/json');
 
       $url = $_GET["action"];
       if(method_exists(API::class, $url)){
@@ -57,7 +56,8 @@ class API
               http_response_code(200);
               $this->response["sMessage"] = "successvol gestemt op foto " . $_GET["foto"];
               $this->response["bSuccess"] = true;
-            } else {
+            }
+            else {
               $this->response["data"] = $this->$url($_GET["param"]);
               http_response_code(200);
               $this->response["sMessage"] = "database succesvol uitgelezen";
@@ -111,7 +111,6 @@ class API
     return $this->dbinstance->getUser($id);
   }
 
-
   private function getPhotos()
   {
     return $this->dbinstance->getPhotos();
@@ -121,7 +120,6 @@ class API
   {
     return $this->dbinstance->getPhoto($id);
   }
-
 
   private function getVideos()
   {
@@ -136,6 +134,11 @@ class API
   private function getMediaPerUser()
   {
     return $this->dbinstance->getMediaPerUser();
+  }
+  //werkt nog niet
+  private function getMediaPerUserYear(int $param)
+  {
+    return $this->dbinstance->getMediaPerUserYear($param);
   }
 
   private function getMediaOfUser(int $id)

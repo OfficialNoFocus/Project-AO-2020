@@ -6,7 +6,7 @@
     require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
     // dd( intval($_GET['id']));
     // dd((new API\Database(API\Settings::getDatabaseCredentials()))->getUser(1));
-    // dd((new API\Database(API\Settings::getDatabaseCredentials()))->getUserPhotos(1));
+    // dd((new API\Database(API\Settings::getDatabaseCredentials()))->getMediaPerUserYear(2019));
     $id = intval($_GET['id']);
     if($id > 0) {
         $grapher = (new API\Database(API\Settings::getDatabaseCredentials()))->getUser($id);

@@ -241,6 +241,30 @@ class Database
     return $this->media;
   }
 
+  public function getMediaPerUserYear(int $param)
+  {
+    $this->media = [];
+    $query = $this->dbinstance->prepare("SELECT u.vnaam, u.tv, u.anaam, u.jaar, u.role, u.beschrijving, u.titel, u.groep_opm, m.img, m.id_cand, m.video, m.desc
+    FROM users AS u
+    INNER JOIN media AS m ON u.id = m.id_cand WHERE jaar = ?
+    ORDER BY anaam;");
+    // $stmt = "SELECT u.vnaam, u.tv, u.anaam, u.role, u.beschrijving, u.titel, u.groep_opm, 
+    //   m.img, m.id_cand, m.video, m.desc
+    //   FROM users AS u
+    //   INNER JOIN media AS m ON u.id = m.id_cand WHERE year = ?
+    //   ORDER BY anaam;";
+    $query->bind_param("i", $param);
+    $query->execute();
+    $this->result = $query->get_result();
+
+    while ($row = $this->result->fetch_assoc()) {
+      $this->media[] = array_map("utf8_encode", $row);
+    }
+    
+    $query->close();
+    return $this->media;
+  }
+
   public function getMediaPerUser()
   {
     $this->media = [];

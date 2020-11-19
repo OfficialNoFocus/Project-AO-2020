@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Worldpress</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
     <!--jQuery 2 nog om geJSON en load functie, die 2 omzetten en je kunt jQuery 3 gebruiken-->
     <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
 
@@ -51,10 +51,15 @@
 </head>
 
 <body style="background-color: #ff0000;">
-<?php if(isset($_GET["overlay"]) && $_GET["overlay"] != 1) {
+<?php 
+  require_once($_SERVER['DOCUMENT_ROOT']."/API/Database.php");
+  require_once($_SERVER['DOCUMENT_ROOT']."/API/Settings.php");
+
+// $param = 2019;
+// echo((new API\Database(API\Settings::getDatabaseCredentials()))->getMediaPerUserYear($param));
+if(isset($_GET["overlay"]) && $_GET["overlay"] != 1) {
     echo '<div id="overlay"></div>';
 }
-
 ?>
 
 <div id="app">
@@ -78,10 +83,11 @@
 
                                 <div style="display:flex; justify-content: space-between; align-items: center; ">
                                     <div style="border:0px solid lime;">
-                                        <select style="width: 100px; padding: 4px;">
-                                            <option value="2019" <?php if(date("Y") === "2019") echo"selected='selected';" ?>>2019 <?php if(date("Y") === "2019") echo"(Nu)" ?></option>
-                                            <option value="2020" <?php if(date("Y") === "2020") echo"selected='selected';" ?>>2020 <?php if(date("Y") === "2020") echo"(Nu)" ?></option> 
+                                        <select id="mySelect" style="width: 100px; padding: 4px;">
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option> 
                                         </select>
+                                        <!-- <button type="button" onclick="selectYear()">Try it</button> -->
                                         <button onclick="nextCand(false)" class="btn btn-danger btn-sm" style="padding:.35rem .5rem; margin: 2px 0 5px 0;">
                                             <img src="vendor/icons-master/icons/chevron-left.svg" fill="/#ffffff" alt="left" />
                                         </button>
@@ -253,7 +259,71 @@
         //console.log("load");
     });
 
-    function initData() {
+    function selectYear() {
+        let year = document.getElementById("mySelect").value;
+        console.log(year);
+    }
+
+    function initData(year) {
+        if (year) {
+            console.log(remote_url+"/?action=getMediaPerUserYear&param="+year);
+            // debugger;
+            $.getJSON( remote_url+"/?action=getMediaPerUserYear&param="+year, function( json ) { //https://wpf.stegion.nl/api/wpf.php?action=getMediaPerUser
+             console.log( "json:", json );
+
+            let bfotoCand;
+            let idCand = 0;
+            let objCand = {};
+            $.each(json.data, function( key, val ) {
+                if(idCand != val.id_cand) { //nieuwe candidate
+                    if(!$.isEmptyObject(objCand))
+                        if(objCand.bfotoCand)
+                            fotoCand.push(objCand); // if not (empty) first one: push photo Candidate in array
+                        else
+                            videoCand.push(objCand); // if not (empty) first one: push video Candidate in array
+                    idCand = val.id_cand;
+                    objCand = {};
+
+                    if(val.video == "")
+                        bfotoCand = true
+                    else
+                        bfotoCand = false;
+
+                    objCand = {
+                        bfotoCand: bfotoCand,
+                        id: val.id_cand,
+                        vnaam: val.vnaam,
+                        tv: val.tv,
+                        anaam: val.anaam,
+                        titel: val.titel,
+                        beschrijving: val.beschrijving,
+                        groep_opm: val.groep_opm,
+                        foto:[val.img+'.jpg'],
+                        desc:[val.desc],
+                        video:val.video
+                        //u.vnaam, u.tv, u.anaam, u.role, u.beschrijving, u.titel, u.groep_opm,
+                        //m.img, m.id_cand, m.video, m.desc
+                    }
+                } else { // if candidate exist just pus photo
+                    if(bfotoCand) {
+                        objCand.foto.push(val.img+'.jpg');
+                        objCand.desc.push(val.desc);
+                    }
+                }
+            });
+            if(objCand.bfotoCand)
+                fotoCand.push(objCand);  // push last photo candidate in array
+            else
+                videoCand.push(objCand); // push last video candidate in array
+
+            //console.log( "fotoCand = ", fotoCand);
+            //console.log( "videoCand = ", videoCand);
+
+            //loadCandidate(currentIndexCand, current_bFoto);
+            loadMedia(current_bFoto);
+        });
+    }
+    else {
         $.getJSON( remote_url+"/?action=getMediaPerUser", function( json ) { //https://wpf.stegion.nl/api/wpf.php?action=getMediaPerUser
             // console.log( "json:", json );
 
@@ -309,6 +379,7 @@
             loadMedia(current_bFoto);
         });
     }
+}
 
     function loadCandidate(index, bFoto) {
         currentIndexCand = index;
@@ -361,7 +432,7 @@
             if( current_bFoto && currentIndexCand < 0) currentIndexCand = fotoCand.length-1;
             if(!current_bFoto && currentIndexCand < 0) currentIndexCand = videoCand.length-1;
         }
-        console.log("loadCandidate, currentIndexCand= "+currentIndexCand+", current_bFoto="+current_bFoto);
+        // console.log("loadCandidate, currentIndexCand= "+currentIndexCand+", current_bFoto="+current_bFoto);
         loadCandidate(currentIndexCand, current_bFoto);
         changeButton ($("#inp_qrcode").val() );
     }
