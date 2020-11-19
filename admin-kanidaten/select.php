@@ -3,9 +3,9 @@
     define('REMOTE_URL','http://school.local');
     require_once($_SERVER['DOCUMENT_ROOT']."/API/Database.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/API/Settings.php");
-    require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
+    // require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
     // dd( intval($_GET['id']));
-    // dd((new API\Database(API\Settings::getDatabaseCredentials()))->getUser(1));
+    // dd((new API\Database(API\Settings::getDatabaseCredentials()))->deleteUser(3));
     // dd((new API\Database(API\Settings::getDatabaseCredentials()))->getMediaPerUserYear(2019));
     $id = intval($_GET['id']);
     if($id > 0) {
