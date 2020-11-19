@@ -3,7 +3,7 @@ namespace API;
 
 require_once("Database.php");
 require_once("Pdf.php");
-require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
+// require($_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php');
 
 /**
  * deze applicatie vereist composer, als je er aan werkt run dan composer update om alle
