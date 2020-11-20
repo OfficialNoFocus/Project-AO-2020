@@ -284,6 +284,19 @@ class Database
     return $this->media;
   }
 
+  public function deleteUser(int $id)
+  {
+    $query = $this->dbinstance->prepare("DELETE FROM `users` WHERE `users`. id = ?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    $query->close();
+
+    $query = $this->dbinstance->prepare("DELETE FROM `media` WHERE `media`.`id_cand` = ?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    $query->close();
+  }
+
   public function createQr(string $code) 
   {
     $this->runQuery("INSERT INTO `qr` (`id`, `qrcode`) VALUES (NULL, '$code');");
