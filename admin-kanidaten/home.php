@@ -68,5 +68,8 @@
     td {
         background-color: #fff;
     }
+    .btn.btn-create:hover {
+        color: #fff;
+    }
 </style>
 </html>

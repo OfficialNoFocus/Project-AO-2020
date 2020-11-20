@@ -35,14 +35,14 @@
     <p>
     	<label for="role">role:</label>
         <select name="role" id="role">
-        <option value="fotograaf">fotograaf</option>
+        <option  value="fotograaf">fotograaf</option>
         <option value="videograaf">videograaf</option>
         </select>
     </p>
 
     <p>
     	<label for="beschrijving">beschrijving:</label>
-        <input type="text" name="beschrijving" id="beschrijving">
+        <textarea name="beschrijving" id="beschrijving"> </textarea>
     </p>
     <p>
     	<label for="titel">titel:</label>
@@ -50,5 +50,36 @@
     </p>
     <input type="submit" value="Add Records">
 </form>
+<style>
+body{
+    background-color: #4a4a4a;
+}
+form {
+    width: fit-content;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 14px 30px 30px 30px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,0.15)!important;
+    border-radius: 4px;
+}
+form  input{
+    width: 100%;
+}
+form p label{
+    display: block;
+    width: 45%;
+    float: left;
+}
+form p input{
+    width: 52%;
+}
+form p textarea{
+    width: 52.5%;
+    height: 50px;
+}
+form p select{
+    width: 55%;
+}
+</style>
 </body>
 </html>

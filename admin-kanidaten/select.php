@@ -155,5 +155,13 @@
             </div>
         </div>
     </div>
+    <style>
+        body {
+            background-color: #4a4a4a;
+        }
+        h2 {
+            border-bottom: 1px solid #4a4a4a;
+        }
+    </style>
 </body>
 </html>
