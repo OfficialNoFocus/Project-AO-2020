@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
 </head>
 <body>
 <table class="table table-responsive-sm">
@@ -34,7 +35,7 @@
     <?php
         foreach($graphers as $id => $grapher) {
             echo '<tr>';
-            
+
             foreach($grapher as $column){
                 echo  "<td>".$column."</td>";
             }
@@ -42,7 +43,7 @@
             <td>
                 <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/select.php?id='.$id.'"><i class="fas fa-eye"></i></a>
                 <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/edit.php?id='.$id.'"><i class="fas fa-pencil-alt"></i></a>
-                <button class="btn btn-sm" id="delete-btn"><i class="fas fa-trash"></i></button>
+                <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/delete.php?id='.$id.'"><i class="fas fa-trash"></i></a>
             </td>';
             echo '</tr>';
         }
