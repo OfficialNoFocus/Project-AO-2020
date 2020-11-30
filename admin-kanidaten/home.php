@@ -43,7 +43,7 @@
             <td>
                 <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/select.php?id='.$id.'"><i class="fas fa-eye"></i></a>
                 <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/edit.php?id='.$id.'"><i class="fas fa-pencil-alt"></i></a>
-                <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/delete.php?id='.$id.'"><i class="fas fa-trash"></i></a>
+                <a class="btn btn-sm d-inline-block" href="'.REMOTE_URL.'/admin-kanidaten/delete.php?id='.$id.'" onclick="return confirm(\'Weet u zeker dat u deze persoon wilt verwijderen?\')"><i class="fas fa-trash"></i></a>
             </td>';
             echo '</tr>';
         }

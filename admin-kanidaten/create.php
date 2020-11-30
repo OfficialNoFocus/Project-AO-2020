@@ -48,7 +48,7 @@
     	<label for="titel">titel:</label>
         <input type="text" name="titel" id="titel">
     </p>
-    <input type="submit" value="Add Records">
+    <input type="submit" onclick="return confirm('Weet u zeker dat u deze persoon wilt toevoegen?')" value="Add Records">
 </form>
 <style>
 body{
